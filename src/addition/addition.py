@@ -1,18 +1,24 @@
+# --- IMPORTS ---
 from enum import Enum
 from tp_package.functions import add_one
 import numpy
 from fastapi import APIRouter
 import logging
+# ---
 
 
+# --- CLASSES ---
 class AddoneMethod(str, Enum):
     python = "python"
     numpy = "numpy"
     tp_package = "tp_package"
+# ---
 
 
+# --- Setup the FastAPI Router ---
 logger = logging.getLogger(__name__)
 router = APIRouter()
+# ---
 
 
 # --- API DEFINITION ---
