@@ -1,5 +1,5 @@
 """
-This file contains unit tests for main.py
+This file contains unit tests for addition/addition.py
 """
 
 
@@ -20,7 +20,7 @@ from src.main import app
 @pytest.mark.anyio
 async def test_addone_success(addend, method, expected):
     async with AsyncClient(app=app, base_url="http://test/") as ac:
-        response = await ac.get("/addone/"+str(addend)+"?method="+str(method))
+        response = await ac.get("/addition/addone/"+str(addend)+"?method="+str(method))
     assert response.status_code == 200
     assert response.json() == {"sum": expected}
 
@@ -33,7 +33,7 @@ async def test_addone_success(addend, method, expected):
 @pytest.mark.anyio
 async def test_addone_wrong_param(addend, method, expected):
     async with AsyncClient(app=app, base_url="http://test/") as ac:
-        response = await ac.get("/addone/"+str(addend)+"?method="+str(method))
+        response = await ac.get("/addition/addone/"+str(addend)+"?method="+str(method))
     assert response.status_code == 422
 
 
@@ -43,7 +43,7 @@ async def test_addone_wrong_param(addend, method, expected):
 @pytest.mark.anyio
 async def test_addone_optional_param(addend, method, expected):
     async with AsyncClient(app=app, base_url="http://test/") as ac:
-        response = await ac.get("/addone/"+str(addend))
+        response = await ac.get("/addition/addone/"+str(addend))
     assert response.status_code == 200
     assert response.json() == {"sum": expected}
 
@@ -54,5 +54,5 @@ async def test_addone_optional_param(addend, method, expected):
 @pytest.mark.anyio
 async def test_addone_missing_param(addend, method, expected):
     async with AsyncClient(app=app, base_url="http://test/") as ac:
-        response = await ac.get("/addone/?method=python")
+        response = await ac.get("/addition/addone/?method=python")
     assert response.status_code == 404
