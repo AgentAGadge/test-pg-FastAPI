@@ -72,14 +72,12 @@ def _setup_logging_queue(logger_name: str = '') -> None:
     listener.start()
 
 
-def setup_logger(logger_name: str = '', logger_config_path: str = LOG_CONFIG_FILE_DEFAULT):
+def setup_logger_with_async(async_logger_name: str = '', logger_config_path: str = LOG_CONFIG_FILE_DEFAULT):
     """
-        Create and configure an async logger based on a config file. In case the file is
-        not found/not valid, then no specific config is applied but the logger is still built
+        Configure the logging system from a file and set up one logger to be async.
 
         Inputs:
-            - logger_name: Name of the logger to configure
-                By default, top-level logger of the app.
+            - async_logger_name: Name of the logger to be made async
             - logger_config_path: Path to the config json file to apply to the logger.
     """
 
@@ -101,7 +99,7 @@ def setup_logger(logger_name: str = '', logger_config_path: str = LOG_CONFIG_FIL
         config_error = error
 
     # Turn the logger into an async logger
-    _setup_logging_queue(logger_name)
+    _setup_logging_queue(async_logger_name)
 
     # Log results
     logger = logging.getLogger(__name__)

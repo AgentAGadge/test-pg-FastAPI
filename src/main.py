@@ -12,7 +12,7 @@ from src.api.addition import addition
 
 
 # --- LOGGING ---
-log_manager.setup_logger(__name__)
+log_manager.setup_logger_with_async()
 logger = logging.getLogger(__name__)
 logger.info('Logger available.')
 # --- END OF: LOGGING ---
