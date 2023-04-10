@@ -6,4 +6,5 @@ uvicorn>=0.21.1
 numpy>=1.24.2
 httpx>=0.23.3
 trio>=0.22.0
+pylint>=2.17.2
 git+https://github.com/AgentAGadge/test-playground@0.0.1#egg=tp_package

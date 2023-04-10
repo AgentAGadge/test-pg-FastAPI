@@ -8,24 +8,21 @@ from src.logger.log_manager import setup_logger
 # ---
 
 
-def test_setup_logger_default_completion():
-    success = False
-    logging.basicConfig(force=True)
-    try:
-        setup_logger()
-        success = True
-    finally:
-        assert success is True
-
-
 @pytest.mark.parametrize("logger_config_path", [
+    (None),
     ('a_wrong_path'),
 ])
-def test_setup_logger_config_path_completion(logger_config_path):
+def test_setup_logger_default_completion(logger_config_path):
+    """
+        Checks that setup_logger runs successfully with various configurations.
+    """
     success = False
     logging.basicConfig(force=True)
     try:
-        setup_logger(logger_config_path=logger_config_path)
+        if logger_config_path is None:
+            setup_logger()
+        else:
+            setup_logger(logger_config_path)
         success = True
     finally:
         assert success is True

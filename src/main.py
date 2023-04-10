@@ -1,7 +1,14 @@
-from fastapi import FastAPI
-import src.logger.log_manager as log_manager
-import src.addition.addition as addition
+"""
+    Main file of the test-pg-fastAPI app.
+    - Set up the app logger
+    - Starts the FastAPI app
+    - Registers the API routers:
+        - addition
+"""
 import logging
+from fastapi import FastAPI
+from src.logger import log_manager
+from src.api.addition import addition
 
 
 # --- LOGGING ---
@@ -25,4 +32,8 @@ logger.info('All routers added.')
 
 @app.get("/")
 async def root():
+    """
+        Root controller of the app.
+        Just displays a message for debug and monitoring purposes.
+    """
     return {"message": "Welcome to the root of test-pg-FastAPI."}
