@@ -51,9 +51,22 @@ def _setup_logging_queue(logger_name: str = '') -> None:
 
 
 def setup_logger(logger_name: str = '', logger_config_path: str = LOG_CONFIG_FILE_DEFAULT):
-    with open(logger_config_path) as logger_config_file:
-        logger_config = json.load(logger_config_file)
-    logging.config.dictConfig(logger_config)
+    is_logger_config_valid = False
+    io_error = None
+    try:
+        with open(logger_config_path, encoding='utf-8') as logger_config_file:
+            logger_config = json.load(logger_config_file)
+            is_logger_config_valid = True
+            logging.config.dictConfig(logger_config)
+    except IOError as error:
+        io_error = error
+
     _setup_logging_queue(logger_name)
     logger = logging.getLogger(__name__)
-    logger.info('Logger configured.')
+
+    if is_logger_config_valid is True:
+        logger.info('Async logger successfully configured.')
+    else:
+        logger.warning(
+            'setup_logger - IOError while retrieving the logger configuration file:%s', io_error)
+        logger.info('Async logger started without specific configuration.')
